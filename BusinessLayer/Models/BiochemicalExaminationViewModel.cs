@@ -8,6 +8,11 @@ namespace BusinessLayer.Models
 {
     public class BiochemicalExaminationViewModel
     {
+        public BiochemicalExaminationViewModel()
+        {
+
+        }
+
         public BiochemicalExaminationViewModel(long AMKA, DateTime date, float glu, float ua, float cre, float chol, float trig, float hdl_c,
             float ldl_c, float ast, float alt, float ggt, float fe, float ldh, float ca,
             float k, float na)

@@ -22,6 +22,8 @@ namespace DataAccessLayer
 
         public DbSet<Payment> Payments { get; set; }
 
+        public DbSet<Visit> Visits { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(

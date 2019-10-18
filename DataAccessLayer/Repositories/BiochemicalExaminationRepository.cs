@@ -9,7 +9,7 @@ namespace DataAccessLayer.Repositories
 {
     public class BiochemicalExaminationRepository
     {
-        //Get All Biochemical
+        //Get All Biochemical independent of user
         public List<BiochemicalExamination> GetAllExaminations()
         {
             var allBiochemicalExaminations = new List<BiochemicalExamination>();
@@ -18,9 +18,8 @@ namespace DataAccessLayer.Repositories
             return allBiochemicalExaminations;
         }
 
-
         //Fere analoga to AMKA
-        public List<BiochemicalExamination> GetBiochemicalExaminations(long amka)
+        public List<BiochemicalExamination> GetBiochemicalExaminationsByUser(long amka)
         {
             var biochemicalExaminationsList = new List<BiochemicalExamination>();
             using (var context = new MDTContext())

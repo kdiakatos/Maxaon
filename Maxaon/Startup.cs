@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using BusinessLayer.Utilities;
 using DataAccessLayer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +39,14 @@ namespace PresentationLayer
 
             //var connection = @"Server=(local)\\sqlexpress;Database= Maxaon;Trusted_Connection=True;MultipleActiveResultSets=true;";
             //services.AddDbContext<MDTContext>(options => options.UseSqlServer(connection));
+
+            // Automapper
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+            var mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
