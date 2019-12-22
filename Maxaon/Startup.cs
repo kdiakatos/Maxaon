@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using BusinessLayer.Services;
 using BusinessLayer.Utilities;
 using DataAccessLayer;
+using DataAccessLayer.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -48,6 +50,8 @@ namespace PresentationLayer
             var mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
+            services.AddTransient<IBiochemicalExaminationRepository, BiochemicalExaminationRepository>();
+            services.AddTransient<IBiochemicalExaminationService, BiochemicalExaminationService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

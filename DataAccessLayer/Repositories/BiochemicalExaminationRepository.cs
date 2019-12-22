@@ -1,13 +1,10 @@
 ﻿using DataAccessLayer.Entities;
-using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DataAccessLayer.Repositories
 {
-    public class BiochemicalExaminationRepository
+    public class BiochemicalExaminationRepository : IBiochemicalExaminationRepository
     {
         //Get All Biochemical independent of user
         public List<BiochemicalExamination> GetAllExaminations()

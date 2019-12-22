@@ -8,12 +8,12 @@ namespace DataAccessLayer.Repositories
 {
     public class UserManagementRepository
     {
-        public bool CreateUser (User user)
+        public bool CreateUser(User user)
         {
             var status = false;
-            using (var context=new MDTContext())
+            using (var context = new MDTContext())
             {
-                var dbRow =context.Users.Any(u => u.AMKA == user.AMKA);
+                var dbRow = context.Users.Any(u => u.AMKA == user.AMKA && u.Email == user.Email);
                 if (!dbRow)
                 {
                     context.Users.Add(user);
@@ -23,6 +23,16 @@ namespace DataAccessLayer.Repositories
             }
 
             return status;
+        }
+
+        public User Login(User user)
+        {
+            using (var context = new MDTContext())
+            {
+                var dbRow = context.Users.SingleOrDefault(u => u.Email == user.Email && u.Password == user.Password);
+                return dbRow;
+
+            }
         }
     }
 }

@@ -8,64 +8,44 @@ using System.Text;
 
 namespace BusinessLayer.Services
 {
-    public class BiochemicalExaminationService
+    public class BiochemicalExaminationService : IBiochemicalExaminationService
     {
         private readonly IMapper _mapper;
+        private readonly IBiochemicalExaminationRepository _biochemicalExaminationRepository;
 
-        public BiochemicalExaminationService(IMapper mapper)
+        public BiochemicalExaminationService(IBiochemicalExaminationRepository biochemicalExaminationRepository, IMapper mapper)
         {
+            _biochemicalExaminationRepository = biochemicalExaminationRepository;
             _mapper = mapper;
         }
 
         public List<BiochemicalExaminationViewModel> GetBiochemicalExaminationsByUser(long amka)
         {
-            var biochemicalExaminationsList = new List<BiochemicalExaminationViewModel>();
-
-            var obj = new BiochemicalExaminationRepository();
-            var dbResult = obj.GetBiochemicalExaminationsByUser(amka);
-
-            biochemicalExaminationsList = _mapper.Map<List<BiochemicalExaminationViewModel>>(dbResult);
-
+            var dbResult = _biochemicalExaminationRepository.GetBiochemicalExaminationsByUser(amka);
+            var biochemicalExaminationsList = _mapper.Map<List<BiochemicalExaminationViewModel>>(dbResult);
             return biochemicalExaminationsList;
         }
 
         public BiochemicalExaminationViewModel CreateBiochemicalExamination(BiochemicalExaminationViewModel biochemicalExamination)
         {
             var dbRow = _mapper.Map<BiochemicalExamination>(biochemicalExamination);
-            var bioRep = new BiochemicalExaminationRepository();
-            var odj2 = bioRep.CreateBiochemicalExamination(dbRow);
-            var result = _mapper.Map<BiochemicalExaminationViewModel>(odj2);
+            var response = _biochemicalExaminationRepository.CreateBiochemicalExamination(dbRow);
+            var result = _mapper.Map<BiochemicalExaminationViewModel>(response);
             return result;
         }
 
         public bool DeleteBiochemicalExamination(int id)
         {
-            var delBio = new BiochemicalExaminationRepository();
-            var obj3 = delBio.DeleteBiochemicalExamination(id);
-            return obj3;
+            var result = _biochemicalExaminationRepository.DeleteBiochemicalExamination(id);
+            return result;
         }
 
         public BiochemicalExaminationViewModel UpdateBiochemicalExamination(BiochemicalExaminationViewModel biochemicalExamination)
         {
             var dbRow = _mapper.Map<BiochemicalExamination>(biochemicalExamination);
-            var bioRep = new BiochemicalExaminationRepository();
-            var odj2 = bioRep.UpdateBiochemicalExamination(dbRow);
-            var result = _mapper.Map<BiochemicalExaminationViewModel>(odj2);
+            var response = _biochemicalExaminationRepository.UpdateBiochemicalExamination(dbRow);
+            var result = _mapper.Map<BiochemicalExaminationViewModel>(response);
             return result;
         }
-
-        //private List<BiochemicalExaminationViewModel> Map(List<BiochemicalExamination> biochemicalExaminations)
-        //{
-        //    var list = new List<BiochemicalExaminationViewModel>();
-        //    foreach (var item in biochemicalExaminations)
-        //    {
-        //        var obj = new BiochemicalExaminationViewModel();
-        //        obj.UserId = item.UserId;
-        //        obj.UA = item.UA;
-        //        obj.K = item.K;
-        //        list.Add(obj);
-        //    }
-        //    return list;
-        //}
     }
 }

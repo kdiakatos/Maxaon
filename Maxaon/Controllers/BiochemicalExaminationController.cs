@@ -16,9 +16,11 @@ namespace PresentationLayer.Controllers
     public class BiochemicalExaminationController : ControllerBase
     {
         private readonly IMapper _mapper;
+        private readonly IBiochemicalExaminationService _biochemicalExaminationService;
 
-        public BiochemicalExaminationController(IMapper mapper)
+        public BiochemicalExaminationController(IBiochemicalExaminationService biochemicalExaminationService,IMapper mapper)
         {
+            _biochemicalExaminationService = biochemicalExaminationService;
             _mapper = mapper;
         }
 
@@ -26,25 +28,22 @@ namespace PresentationLayer.Controllers
         [HttpGet("{amka}")]
         public ActionResult GetBiochemicalExaminationsByUser(long amka)
         {
-            var obj = new BiochemicalExaminationService(_mapper);
-            var value = obj.GetBiochemicalExaminationsByUser(amka);
+            var value = _biochemicalExaminationService.GetBiochemicalExaminationsByUser(amka);
             return Ok(value);
         }
 
         [HttpPost]
         public ActionResult AddBiochemicalExamination([FromBody] BiochemicalExaminationViewModel biochemicalExamination)
         {
-            var obj = new BiochemicalExaminationService(_mapper);
-            var value = obj.CreateBiochemicalExamination(biochemicalExamination);
+            var value = _biochemicalExaminationService.CreateBiochemicalExamination(biochemicalExamination);
             return Ok(value);
-
         }
+
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public ActionResult DeleteBiochemicalExamination(int id)
         {
-            var repo = new BiochemicalExaminationService(_mapper);
-            var deleteBio = repo.DeleteBiochemicalExamination(id);
+            var deleteBio = _biochemicalExaminationService.DeleteBiochemicalExamination(id);
             return Ok(deleteBio);
         }
 
@@ -52,8 +51,7 @@ namespace PresentationLayer.Controllers
         [HttpPut]
         public ActionResult Put([FromBody] BiochemicalExaminationViewModel biochemicalExamination)
         {
-            var obj = new BiochemicalExaminationService(_mapper);
-            var value = obj.UpdateBiochemicalExamination(biochemicalExamination);
+            var value = _biochemicalExaminationService.UpdateBiochemicalExamination(biochemicalExamination);
             return Ok(value);
         }
 
@@ -61,8 +59,7 @@ namespace PresentationLayer.Controllers
         [Route("GetKsum")]
         public ActionResult GetKSum([FromQuery]long amka)
         {
-            var obj = new BiochemicalExaminationService(_mapper);
-            var value = obj.GetBiochemicalExaminationsByUser(amka);
+            var value = _biochemicalExaminationService.GetBiochemicalExaminationsByUser(amka);
             var x = new List<float>();
             foreach (var item in value)
             {
