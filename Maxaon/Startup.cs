@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PresentationLayer.Helpers;
 
 namespace PresentationLayer
 {
@@ -50,13 +51,9 @@ namespace PresentationLayer
             var mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            services.AddTransient<IBiochemicalExaminationRepository, BiochemicalExaminationRepository>();
-            services.AddTransient<IBloodExaminationRepository, BloodExaminationRepository>();
-            services.AddTransient<IVisitRepository, VisitRepository>();
-            services.AddTransient<IUserManagementRepository, UserManagementRepository>();
-
-            services.AddTransient<IBiochemicalExaminationService, BiochemicalExaminationService>();
-            services.AddTransient<IBloodExaminationService, BloodExaminationService>();
+            services.AddDIRepositories();
+            services.AddDIServices();
+            
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
