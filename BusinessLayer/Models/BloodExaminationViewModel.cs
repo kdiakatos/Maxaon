@@ -8,6 +8,11 @@ namespace BusinessLayer.Models
 {
     public class BloodExaminationViewModel
     {
+        public BloodExaminationViewModel()
+        {
+
+        }
+
         public BloodExaminationViewModel(long AMKA, DateTime date, float rbc, float hgb, float hct, float mcv, float mch, float mchc,
             float rdw_cv, float wbc, float neut, float lym)
         {
@@ -24,7 +29,6 @@ namespace BusinessLayer.Models
             NEUT = neut;
             LYM = lym;
         }
-
 
 
         [Key]

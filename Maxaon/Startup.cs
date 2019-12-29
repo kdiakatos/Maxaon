@@ -51,7 +51,13 @@ namespace PresentationLayer
             services.AddSingleton(mapper);
 
             services.AddTransient<IBiochemicalExaminationRepository, BiochemicalExaminationRepository>();
+            services.AddTransient<IBloodExaminationRepository, BloodExaminationRepository>();
+            services.AddTransient<IVisitRepository, VisitRepository>();
+            services.AddTransient<IUserManagementRepository, UserManagementRepository>();
+
             services.AddTransient<IBiochemicalExaminationService, BiochemicalExaminationService>();
+            services.AddTransient<IBloodExaminationService, BloodExaminationService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

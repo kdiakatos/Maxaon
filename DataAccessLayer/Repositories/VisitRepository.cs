@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAccessLayer.Repositories
 {
-    public class VisitRepository
+    public class VisitRepository : IVisitRepository
     {
         public Visit CreateVisit(Visit visit)
         {

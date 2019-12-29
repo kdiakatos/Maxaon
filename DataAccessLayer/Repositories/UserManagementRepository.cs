@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAccessLayer.Repositories
 {
-    public class UserManagementRepository
+    public class UserManagementRepository : IUserManagementRepository
     {
         public bool CreateUser(User user)
         {

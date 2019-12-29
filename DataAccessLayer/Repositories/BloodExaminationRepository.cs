@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DataAccessLayer.Repositories
 {
-    public class BloodExaminationRepository
+    public class BloodExaminationRepository : IBloodExaminationRepository
     {
         //Get all Blood independent of user
         public List<BloodExamination> GetAllExamination()
@@ -36,7 +36,7 @@ namespace DataAccessLayer.Repositories
             using (var context = new MDTContext())
             {
                 var dbRow = context.BloodExaminations.Find(id);
-                if (dbRow !=null)
+                if (dbRow != null)
                 {
                     context.BloodExaminations.Remove(dbRow);
                     context.SaveChanges();
